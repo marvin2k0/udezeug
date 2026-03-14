@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ### 💡 INVEST Reminder
+        Make sure user stories follow the INVEST principles:
         **I**ndependent, **N**egotiable, **V**aluable, **E**stimable, **S**mall, **T**estable.
   
   - type: textarea
@@ -23,11 +23,7 @@ body:
       label: Acceptance Criteria
       description: "List the criteria that must be met for this story to be 'Done'. (You can add or edit rows below)"
       value: |
-        - [ ] Criteria 1: 
-        - [ ] Criteria 2: 
-        - [ ] Criteria 3: 
-        - [ ] The feature is covered by unit tests.
-        - [ ] Documentation has been updated.
+        - [ ] ...
     validations:
       required: true
 
