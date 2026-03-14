@@ -1,17 +1,40 @@
 name: User Story
-description: Create a user story. Make sure it adheres to the INVEST principles.
-labels:
-  - user-story
+description: Create a user story that adheres to the INVEST principles.
+labels: ["user-story"]
 body:
   - type: markdown
     attributes:
       value: |
-        "## User Story
-        ...
-
-        ## Acceptance criteria
-        - [ ] ...
-        "
+        ### 💡 INVEST Reminder
+        **I**ndependent, **N**egotiable, **V**aluable, **E**stimable, **S**mall, **T**estable.
+  
   - type: textarea
+    id: story-text
     attributes:
-      label: Test
+      label: User Story
+      description: "Format: As a [persona], I want [action], so that [value]. (Max 2 sentences)"
+      placeholder: "As a user, I want to..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: What must be true for this story to be considered 'Done'?
+      options:
+        - label: "Criteria 1: [Edit me]"
+        - label: "Criteria 2: [Edit me]"
+        - label: "Criteria 3: [Edit me]"
+        - label: "The feature is covered by unit tests."
+        - label: "Documentation has been updated."
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Screenshots, links, or technical constraints.
+    validations:
+      required: false
