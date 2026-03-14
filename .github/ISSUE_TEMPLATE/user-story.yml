@@ -1,6 +1,6 @@
 name: User Story
 description: Create a user story that adheres to the INVEST principles.
-labels: ["user-story"]
+labels: ["user story"]
 body:
   - type: markdown
     attributes:
