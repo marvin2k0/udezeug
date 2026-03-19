@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
-import {MatButton} from "@angular/material/button";
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-home',
-    imports: [
-        MatButton,
-    ],
+  imports: [],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home {}
+export class Home {
+}
