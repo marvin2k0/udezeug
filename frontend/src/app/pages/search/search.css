@@ -1,0 +1,30 @@
+/* The state the element animates TOWARD when entering */
+.fade-slide-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* The "Before" state: where it starts from */
+  @starting-style {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+/* The state it animates TOWARD when leaving */
+.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+}
+
+/* Simple backdrop fade */
+.backdrop-fade {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+  @starting-style { opacity: 0; }
+}
+.backdrop-leave {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
