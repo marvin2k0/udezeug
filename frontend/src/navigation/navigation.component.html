@@ -8,34 +8,47 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>
-      <div class="image-container relative cursor-pointer" routerLink="home">
-        <img class="size-5" ngSrc="/udezeug-transparent.png" alt="" height="50" width="50">
+      <div class="image-container relative cursor-pointer select-none flex flex-row gap-4 items-center"
+           routerLink="home" (click)="drawer.mode === 'over' ? drawer.close() : null">
         <div class="absolute w-full h-full"></div>
+        <img class="size-5" ngSrc="/udezeug-transparent.png" height="25" width="25">
+        <span class="font-extrabold">UdeZeug</span>
       </div>
     </mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list class="select-none" (click)="drawer.mode === 'over' ? drawer.close() : null">
       <a mat-list-item routerLink="home">
         <mat-icon matListItemIcon>home</mat-icon>
         <div matListItemTitle>Home</div>
       </a>
-      <a mat-list-item routerLink="admin">
-        <mat-icon matListItemIcon>admin_panel_settings</mat-icon>
-        <div matListItemTitle>Admin</div>
-      </a>
-      <a mat-list-item routerLink="profile">
-        <mat-icon matListItemIcon>person</mat-icon>
-        <div matListItemTitle>Profil</div>
+      <a mat-list-item routerLink="search">
+        <mat-icon matListItemIcon>search</mat-icon>
+        <div matListItemTitle>Suche</div>
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar>
+    <mat-toolbar class="flex items-center justify-between">
       @if (isHandset$ | async) {
         <button type="button" aria-label="Toggle sidenav" matIconButton (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
+        @if (!onSearchPage) {
+          <button class="ml-auto" matIconButton (click)="toggleSearch()">
+            <mat-icon>search</mat-icon>
+          </button>
+        }
       }
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="px-4">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+@if (searchOpen()) {
+  <div class="overlay absolute top-0 left-0 w-full z-50 bg-black/60 h-full" (click)="toggleSearch()"
+       [class.fade-slide-in]="true" animate.leave="fade-out"></div>
+  <div class="big-search absolute top-23 lef-0 w-full z-50 px-5" [class.fade-slide-in]="true" #bigSearch>
+    <app-search></app-search>
+  </div>
+}
