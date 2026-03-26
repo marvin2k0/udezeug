@@ -9,6 +9,8 @@ services:
       - internal
   frontend:
     build: ./frontend
+    environment:
+      API_URL: https://api.example.org
     ports:
       - "80:80"
   db:
