@@ -1,0 +1,18 @@
+package de.udezeug.backend.course;
+
+import de.udezeug.backend.course.dto.CourseCreationRequest;
+import de.udezeug.backend.course.dto.CourseCreationResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class CourseService {
+    private final CourseMapper mapper;
+    private final CourseRepository courseRepository;
+
+    public CourseCreationResponse createCourse(CourseCreationRequest request) {
+        final Course course = this.courseRepository.save(this.mapper.toCourse(request));
+        return this.mapper.toCourseCreationResponse(course);
+    }
+}
