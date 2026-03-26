@@ -1,10 +1,12 @@
 import {Component, computed, inject} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {CourseService} from '../course-service';
 
 @Component({
   selector: 'app-course-page',
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './course-page.html',
   styleUrl: './course-page.css',
 })
