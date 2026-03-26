@@ -5,6 +5,8 @@ import de.udezeug.backend.course.dto.CourseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class CourseService {
@@ -13,6 +15,11 @@ public class CourseService {
 
     public CourseResponse createCourse(CourseCreationRequest request) {
         final Course course = this.courseRepository.save(this.mapper.toCourse(request));
+        return this.mapper.toCourseResponse(course);
+    }
+
+    public CourseResponse getCourse(UUID id) {
+        final Course course = this.courseRepository.findById(id).orElseThrow();
         return this.mapper.toCourseResponse(course);
     }
 }
