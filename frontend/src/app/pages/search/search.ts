@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {MatIcon} from '@angular/material/icon';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {debounceTime, distinctUntilChanged, filter} from 'rxjs';
+import {debounceTime, distinctUntilChanged, tap} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CourseService} from '../../course/course-service';
 import {MatCard, MatCardContent, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
@@ -29,13 +29,13 @@ import {MatButton} from '@angular/material/button';
 export class Search {
   private readonly courseService = inject(CourseService);
 
-  readonly searchControl = new FormControl('')
+  readonly searchControl = new FormControl(this.courseService.searchTerm())
   readonly rawSearchTerm = toSignal(
     this.searchControl.valueChanges.pipe(
       map(v => (v ?? '').trim()),
       debounceTime(400),
       distinctUntilChanged(),
-      filter(v => v.length > 0),
+      tap((v) => this.courseService.searchTerm.set(v))
     ),
     {initialValue: this.searchControl.value ?? ''}
   );

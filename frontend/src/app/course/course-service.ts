@@ -1,6 +1,6 @@
 import {
   inject,
-  Injectable,
+  Injectable, signal,
   Signal
 } from '@angular/core';
 import {httpResource} from '@angular/common/http';
@@ -14,6 +14,8 @@ import {ResourceService} from '../http/resource-service';
 export class CourseService {
   private readonly baseUrl = config.apiUrl
   private readonly resourceService = inject(ResourceService)
+
+  readonly searchTerm = signal<string>('')
 
   getCourse(id: string) {
     return httpResource<Course>(() => `${this.baseUrl}/v1/course/${id}`);
