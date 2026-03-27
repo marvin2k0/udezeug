@@ -1,5 +1,11 @@
-@if (course.hasValue()) {
-  <p>Found course {{ course.value().name }}</p>
-} @else {
-  <p>Course not found <a routerLink="/search" class="text-blue-400 underline underline-offset-3">Go to search</a></p>
+@defer (when !course.isLoading()) {
+  @if (course.hasValue()) {
+    <p>Found course {{ course.value().name }}</p>
+  } @else {
+    <p>Course not found <a routerLink="/search" class="text-blue-400 underline underline-offset-3">Go to search</a></p>
+  }
+} @loading (after 100ms; minimum 200ms) {
+  <div class="flex justify-center absolute left-0 w-full mt-7 z-10">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
 }
