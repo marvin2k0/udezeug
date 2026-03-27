@@ -6,6 +6,7 @@
       placeholder="Suche" [formControl]="searchControl">
     @if (searchControl.value) {
       <mat-icon
+        matTooltip="Suche leeren"
         (click)="searchControl.setValue('')"
         class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:text-primary transition-colors">
         close
@@ -50,6 +51,7 @@
                   <div class="flex justify-end">
                     <button
                       matButton="filled"
+                      matTooltip="Kurs Ansehen"
                       class="whitespace-nowrap px-6"
                       [routerLink]="['/course', course.id]">
                       Ansehen

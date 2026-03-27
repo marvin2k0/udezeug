@@ -9,6 +9,7 @@ import {MatCard, MatCardContent, MatCardSubtitle, MatCardTitle} from '@angular/m
 import {RouterLink} from '@angular/router';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatButton} from '@angular/material/button';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-search',
@@ -22,6 +23,7 @@ import {MatButton} from '@angular/material/button';
     MatProgressSpinner,
     MatButton,
     MatCardContent,
+    MatTooltip,
   ],
   templateUrl: './search.html',
   styleUrl: './search.css',
