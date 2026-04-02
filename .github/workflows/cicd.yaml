@@ -57,9 +57,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Determine Docker Tags
-        id: tags
+      - name: Determine Docker Metadata
+        id: meta
         run: |
+          REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          echo "backend_image=ghcr.io/$REPO_OWNER/udezeug-backend" >> $GITHUB_OUTPUT
+          echo "frontend_image=ghcr.io/$REPO_OWNER/udezeug-frontend" >> $GITHUB_OUTPUT
           COMMIT_HASH=$(git rev-parse --short HEAD)
           echo "commit_hash=$COMMIT_HASH" >> $GITHUB_OUTPUT
           
@@ -75,8 +78,8 @@ jobs:
           context: ./backend
           push: true
           tags: |
-            ${{ env.IMAGE_NAME_BACKEND }}:${{ steps.tags.outputs.commit_hash }}
-            ${{ env.IMAGE_NAME_BACKEND }}:${{ steps.tags.outputs.env_tag }}
+            ${{ steps.meta.outputs.backend_image }}:${{ steps.meta.outputs.commit_hash }}
+            ${{ steps.meta.outputs.backend_image }}:${{ steps.meta.outputs.env_tag }}
 
       - name: Build and Push Frontend Image
         uses: docker/build-push-action@v5
@@ -84,5 +87,5 @@ jobs:
           context: ./frontend
           push: true
           tags: |
-            ${{ env.IMAGE_NAME_FRONTEND }}:${{ steps.tags.outputs.commit_hash }}
-            ${{ env.IMAGE_NAME_FRONTEND }}:${{ steps.tags.outputs.env_tag }}
+            ${{ steps.meta.outputs.frontend_image }}:${{ steps.meta.outputs.commit_hash }}
+            ${{ steps.meta.outputs.frontend_image }}:${{ steps.meta.outputs.env_tag }}
