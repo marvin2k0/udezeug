@@ -1,1 +1,16 @@
-<p>create-course works!</p>
+<div class="container mx-auto max-w-7xl flex flex-col gap-5">
+  <h1 class="text-3xl">Neuen Kurs erstellen</h1>
+  <form (submit)="onCreateCourse($event)">
+    <mat-form-field class="w-full">
+      <mat-label>Name</mat-label>
+      <input [formField]="createCourseForm.name" matInput>
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Beschreibung</mat-label>
+      <textarea [formField]="createCourseForm.description" matInput></textarea>
+    </mat-form-field>
+
+    <button class="w-full lg:w-fit" matButton="filled">Erstellen</button>
+  </form>
+</div>
