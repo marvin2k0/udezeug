@@ -1,13 +1,14 @@
 package de.udezeug.backend.course.dto;
 
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-
-import java.util.List;
 
 public record CourseCreationRequest(
         @Size(min = 3, max = 255)
         String name,
         String description,
-        List<String> tags
+        @Pattern(regexp = "^[a-zA-Z0-9äöüÄÖÜß]+(,\\s*[a-zA-Z0-9äöüÄÖÜß]+)*$")
+        String tags,
+        Boolean visible
 ) {
 }
