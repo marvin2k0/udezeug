@@ -43,7 +43,9 @@ export class CreateCourse {
     name: '',
     description: '',
     visible: true,
-    examDate: ''
+    examDate: '',
+    tags: '',
+    moodle: ''
   })
   protected readonly createCourseForm = form(this.createCourseModel, (schema) => {
     required(schema.name)
@@ -79,5 +81,7 @@ export interface CreateCourseData {
   name: string,
   description: string
   visible: boolean,
-  examDate: string
+  examDate: string,
+  tags: string,
+  moodle: string
 }
