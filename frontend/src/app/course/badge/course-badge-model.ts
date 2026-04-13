@@ -1,3 +1,4 @@
 export enum CourseBadge {
-  OFFICIAL
+  OFFICIAL,
+  POPULAR
 }
