@@ -18,6 +18,7 @@ import java.util.List;
 )
 public interface CourseMapper {
     @Mapping(target = "tags", expression = "java(mapTags(request.tags()))")
+    @Mapping(target = "examDate", source = "request.examDate")
     Course toCourse(CourseCreationRequest request);
 
     @Mapping(target = "id", expression = "java(course.isVisible() ? course.getId() : null)")
