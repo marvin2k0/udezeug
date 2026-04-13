@@ -6,6 +6,8 @@
       @if (!course().visible) {
         <mat-icon>lock</mat-icon>
       }
+
+      <app-course-badges [course]="course()" />
     </h3>
     <p class="text-gray-400">{{ course().description }}</p>
   </header>
