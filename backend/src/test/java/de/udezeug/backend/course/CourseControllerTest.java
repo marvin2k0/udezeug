@@ -60,7 +60,7 @@ public class CourseControllerTest {
         final Course course = new Course(UUID.randomUUID(), "Course name", "Course description", List.of("Tag 1",
                 "Tag 2"), false, List.of(CourseBadge.OFFICIAL), LocalDate.now(), "https://moodle.example.org");
         final CourseResponse response = new CourseResponse(null, course.getName(), null, null, false,
-                course.getBadges(), course.getExamDate(), course.getMoodle());
+                course.getBadges(), null, null);
 
         when(service.getCourse(course.getId())).thenReturn(response);
         when(mapper.toCourseResponse(course)).thenReturn(response);
