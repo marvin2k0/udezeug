@@ -1,5 +1,6 @@
 package de.udezeug.backend.course;
 
+import de.udezeug.backend.course.badge.CourseBadge;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.search.engine.backend.types.Sortable;
@@ -40,6 +41,12 @@ public class Course {
 
     @Builder.Default
     private boolean visible = true;
+
+    @ElementCollection
+    @Column(name = "badge_name")
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(joinColumns = @JoinColumn(name = "course_id"))
+    private List<CourseBadge> badges;
 
     private LocalDate examDate;
     private String moodle;
