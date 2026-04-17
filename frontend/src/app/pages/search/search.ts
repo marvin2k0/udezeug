@@ -1,16 +1,17 @@
-import {Component, inject} from '@angular/core';
-import {MatIcon} from '@angular/material/icon';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {debounceTime, distinctUntilChanged, tap} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {CourseService} from '../../course/course-service';
-import {MatCard, MatCardContent, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
-import {RouterLink} from '@angular/router';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {MatButton} from '@angular/material/button';
-import {MatTooltip} from '@angular/material/tooltip';
-import {CourseBadges} from '../../course/badge/course-badges/course-badges';
+import { Component, inject } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { CourseService } from '../../course/course-service';
+import { MatCard, MatCardContent, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
+import { RouterLink } from '@angular/router';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { CourseBadges } from '../../course/badge/course-badges/course-badges';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +27,7 @@ import {CourseBadges} from '../../course/badge/course-badges/course-badges';
     MatCardContent,
     MatTooltip,
     CourseBadges,
+    TranslocoPipe,
   ],
   templateUrl: './search.html',
   styleUrl: './search.css',
@@ -33,15 +35,15 @@ import {CourseBadges} from '../../course/badge/course-badges/course-badges';
 export class Search {
   private readonly courseService = inject(CourseService);
 
-  readonly searchControl = new FormControl(this.courseService.searchTerm())
+  readonly searchControl = new FormControl(this.courseService.searchTerm());
   readonly rawSearchTerm = toSignal(
     this.searchControl.valueChanges.pipe(
-      map(v => (v ?? '').trim()),
+      map((v) => (v ?? '').trim()),
       debounceTime(400),
       distinctUntilChanged(),
-      tap((v) => this.courseService.searchTerm.set(v))
+      tap((v) => this.courseService.searchTerm.set(v)),
     ),
-    {initialValue: this.searchControl.value ?? ''}
+    { initialValue: this.searchControl.value ?? '' },
   );
-  readonly courses = this.courseService.searchCourses(this.rawSearchTerm)
+  readonly courses = this.courseService.searchCourses(this.rawSearchTerm);
 }

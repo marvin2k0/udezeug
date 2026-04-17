@@ -3,79 +3,78 @@
     <input
       class="block mx-auto py-3 px-6 rounded-full w-full shadow shadow-black bg-surface-variant focus:ring-2 focus:ring-primary focus:outline-none"
       type="search"
-      placeholder="Suche" [formControl]="searchControl">
+      [placeholder]="'search.search' | transloco"
+      [formControl]="searchControl"
+    />
     @if (searchControl.value) {
-      <mat-icon
-        matTooltip="Suche leeren"
-        (click)="searchControl.setValue('')"
-        class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:text-primary transition-colors">
-        close
-      </mat-icon>
+    <mat-icon
+      [matTooltip]="'search.clear_search' | transloco"
+      (click)="searchControl.setValue('')"
+      class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:text-primary transition-colors"
+    >
+      close
+    </mat-icon>
     } @else {
-      <mat-icon class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline">
-        search
-      </mat-icon>
+    <mat-icon class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline">
+      search
+    </mat-icon>
     }
   </div>
 </div>
 
 <div class="container mx-auto">
   @if (courses.isLoading()) {
-    <div class="flex justify-center absolute left-0 w-full mt-7 z-10">
-      <mat-spinner diameter="50"></mat-spinner>
-    </div>
+  <div class="flex justify-center absolute left-0 w-full mt-7 z-10">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
   }
 
   <div [class.opacity-50]="courses.isLoading()" class="transition-opacity">
     @if (courses.hasValue()) {
-      <div class="p-5 flex flex-row justify-between">
-      <span>
-            {{ courses.value().length }} Ergebnisse
-      </span>
-      </div>
+    <div class="p-5 flex flex-row justify-between">
+      <span> {{ courses.value().length }} {{ 'search.results' | transloco }} </span>
+    </div>
 
-      <ul class="flex flex-col gap-4">
-        @for (course of courses.value(); track course.id) {
-          <li>
-            <mat-card class="p-4">
-              <mat-card-content>
-                <div class="grid grid-cols-[1fr_auto] items-center gap-4 w-full">
-                  <div class="flex flex-col min-w-0">
-                    <mat-card-title>
-                      <span class="truncate font-bold text-lg flex items-center gap-2">
-                        @if (!course.visible) {
-                          <mat-icon>lock</mat-icon>
-                        }
-                        {{ course.name }}
-                        <app-course-badges [course]="course" />
-                      </span>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                      <span class="text-gray-400 block truncate">{{ course.description }}</span>
-                    </mat-card-subtitle>
-                  </div>
-                  <div class="flex justify-end">
-                    <button
-                      matButton="filled"
-                      matTooltip="Kurs Ansehen"
-                      class="px-6 flex flex-col items-center"
-                      [routerLink]="['/course', course.id]"
-                      [disabled]="!course.visible">
-                      <span class="flex items-center justify-center gap-2">
-                        @if (!course.visible) {
-                          <mat-icon>lock</mat-icon>
-                        } @else {
-                          Ansehen
-                        }
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </mat-card-content>
-            </mat-card>
-          </li>
-        }
-      </ul>
+    <ul class="flex flex-col gap-4">
+      @for (course of courses.value(); track course.id) {
+      <li>
+        <mat-card class="p-4">
+          <mat-card-content>
+            <div class="grid grid-cols-[1fr_auto] items-center gap-4 w-full">
+              <div class="flex flex-col min-w-0">
+                <mat-card-title>
+                  <span class="truncate font-bold text-lg flex items-center gap-2">
+                    @if (!course.visible) {
+                    <mat-icon>lock</mat-icon>
+                    } {{ course.name }}
+                    <app-course-badges [course]="course" />
+                  </span>
+                </mat-card-title>
+                <mat-card-subtitle>
+                  <span class="text-gray-400 block truncate">{{ course.description }}</span>
+                </mat-card-subtitle>
+              </div>
+              <div class="flex justify-end">
+                <button
+                  matButton="filled"
+                  [matTooltip]="'search.view_course' | transloco"
+                  class="px-6 flex flex-col items-center"
+                  [routerLink]="['/course', course.id]"
+                  [disabled]="!course.visible"
+                >
+                  <span class="flex items-center justify-center gap-2">
+                    @if (!course.visible) {
+                    <mat-icon>lock</mat-icon>
+                    } @else { {{ 'search.view_course' | transloco }} }
+                  </span>
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </li>
+      }
+    </ul>
     }
   </div>
 </div>

@@ -2,11 +2,12 @@ import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CourseService } from '../course-service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import {CourseDetails} from '../course-details/course-details';
+import { CourseDetails } from '../course-details/course-details';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-course-page',
-  imports: [RouterLink, MatProgressSpinner, CourseDetails],
+  imports: [RouterLink, MatProgressSpinner, CourseDetails, TranslocoPipe],
   templateUrl: './course-page.html',
   styleUrl: './course-page.css',
 })

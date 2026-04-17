@@ -1,12 +1,14 @@
 @if (course.isLoading()) {
-  <div class="flex justify-center absolute left-0 w-full mt-7 z-10">
-    <mat-spinner diameter="50"></mat-spinner>
-  </div>
+<div class="flex justify-center absolute left-0 w-full mt-7 z-10">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
 } @else if (course.hasValue()) {
-  <app-course-details [course]="course.value()" />
+<app-course-details [course]="course.value()" />
 } @else {
-  <p>
-    Course not found
-    <a routerLink="/search" class="text-blue-400 underline underline-offset-3">Go to search</a>
-  </p>
+<p>
+  {{ 'course_details.not_found.text' | transloco }}
+  <a routerLink="/search" class="text-blue-400 underline underline-offset-3">
+    {{ 'course_details.not_found.link' | transloco }}
+  </a>
+</p>
 }
