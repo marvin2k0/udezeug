@@ -5,10 +5,11 @@ import { CourseBadges } from '../badge/course-badges/course-badges';
 import { DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-course-details',
-  imports: [MatIcon, CourseBadges, DatePipe, MatButton, MatTooltip],
+  imports: [MatIcon, CourseBadges, DatePipe, MatButton, MatTooltip, TranslocoPipe],
   templateUrl: './course-details.html',
   styleUrl: './course-details.css',
 })

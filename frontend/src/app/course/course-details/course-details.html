@@ -15,7 +15,7 @@
       <a [href]="course().moodle" target="_blank">
         <button matButton matIconButton>
           <mat-icon>school</mat-icon>
-          Moodlekurs
+          {{ 'course_details.moodle_link' | transloco }}
         </button>
       </a>
     </div>
@@ -23,7 +23,7 @@
   </header>
   <div class="text-gray-400 flex flex-col gap-3">
     @if (course().examDate) {
-    <p class="flex gap-1 w-fit" matTooltip="Klausurdatum">
+    <p class="flex gap-1 w-fit" [matTooltip]="'course_details.exam_date' | transloco">
       <mat-icon>history_edu</mat-icon>
       {{ course().examDate | date }}
     </p>
@@ -47,7 +47,8 @@
 
       @if (desc.length > 100) {
       <button (click)="toggleDescription()" class="text-primary cursor-pointer">
-        {{ descriptionExpanded() ? 'Weniger' : 'Mehr anzeigen' }}
+        @let less = 'course_details.show_less' | transloco; @let more = 'course_details.show_more' |
+        transloco; {{ descriptionExpanded() ? less : more }}
       </button>
       }
     </div>
